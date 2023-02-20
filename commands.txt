@@ -1,0 +1,12 @@
+# Create Virtualenv
+    *python -m venv (name)
+
+#Install Dependecis
+
+    *pip install django
+    *pip install djangorestframework
+
+#Init Project Django
+
+    *django-admin startproject (name) .
+    *python manage.py runserver
