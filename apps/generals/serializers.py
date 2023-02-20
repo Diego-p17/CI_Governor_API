@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from .models        import * 
+from .models        import *
+
 
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model  = TbCountry
         fields = ('Id_Country', 'nameCountry')
-        
+
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = TbCity
@@ -16,7 +17,7 @@ class DeviceTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = TbDeviceType
         fields = ('Id_DeviceType', 'nameDeviceType')
-        
+
 class HwPlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model  = TbHwPlatform
@@ -31,13 +32,13 @@ class TokenTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model  = TbTokenType
         fields = ('Id_TokenType', 'nameTokenType')
-        
+
 class SettingTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model  = TbSettingType
         fields = ('Id_SettingType', 'nameSettingType')
 
-class LevelKeysSerializer(serializers.ModelSerializer):
+class LevelKeySerializer(serializers.ModelSerializer):
     class Meta:
-        models = TbLevelKeys
-        fields = ('Id_LevelKeys', 'nameLevelKeys')
+        model = TbLevelKeys
+        fields = ('__all__')
