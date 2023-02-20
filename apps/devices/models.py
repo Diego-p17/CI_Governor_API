@@ -6,6 +6,7 @@ class TbDevice(models.Model):
     nameDevice          = models.CharField(db_column='nameDevice', max_length=255 , null=False)
     tokenDevice         = models.CharField(db_column='tokenDevice', max_length=255 , null=False)
     creationDateDevice  = models.DateTimeField(db_column='creationDateDevice', auto_now_add=True)
+    isActive            = models.BooleanField( db_column='isActive', default=True)
 
     # Dependencies tables
     hwPlatform   = models.ForeignKey( 'generals.TbHwPlatform' , db_column='Id_HwPlatform', on_delete=models.CASCADE)
