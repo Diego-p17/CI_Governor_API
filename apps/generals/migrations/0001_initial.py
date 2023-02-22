@@ -46,17 +46,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='TbLevelKeys',
-            fields=[
-                ('Id_LevelKeys', models.AutoField(db_column='Id_TokenType', primary_key=True, serialize=False)),
-                ('nameLevelKeys', models.CharField(db_column='nameLevelKeys', max_length=255)),
-            ],
-            options={
-                'db_table': 'Tb_LevelKeys',
-                'managed': True,
-            },
-        ),
-        migrations.CreateModel(
             name='TbOs',
             fields=[
                 ('Id_Os', models.AutoField(db_column='Id_Os', primary_key=True, serialize=False)),

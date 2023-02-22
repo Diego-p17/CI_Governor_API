@@ -37,8 +37,3 @@ class SettingTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model  = TbSettingType
         fields = ('Id_SettingType', 'nameSettingType')
-
-class LevelKeySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TbLevelKeys
-        fields = ('__all__')

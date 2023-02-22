@@ -38,7 +38,3 @@ class SettingsTypeViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class   = SettingTypeSerializer
     
-class LevelKeyViewSet(viewsets.ModelViewSet):
-    queryset = TbLevelKeys.objects.all()
-    permission_classes = [permissions.AllowAny]
-    serializer_class   = LevelKeySerializer

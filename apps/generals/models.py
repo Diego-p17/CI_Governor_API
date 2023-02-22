@@ -71,12 +71,3 @@ class TbSettingType(models.Model):
     class Meta:
         managed  = True
         db_table = 'Tb_SettingType'
-class TbLevelKeys(models.Model):
-    Id_LevelKeys  = models.AutoField(db_column='Id_TokenType', primary_key=True)
-    nameLevelKeys = models.CharField(db_column='nameLevelKeys', max_length=255 , null=False)
-
-    def __str__(self):
-        return self.nameLevelKeys
-    class Meta:
-        managed  = True
-        db_table = 'Tb_LevelKeys'
