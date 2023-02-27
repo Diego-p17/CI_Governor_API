@@ -5,7 +5,7 @@ from .serializers    import DeviceSerializer
 
 class DeviceViewSet(viewsets.ModelViewSet):
 
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class   = DeviceSerializer
     def get_queryset(self):
         queryset     = TbDevice.objects.all()

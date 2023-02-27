@@ -4,6 +4,19 @@ from .serializers    import PackageConfigSerializer
 
 
 class PackageConfigViewSet(viewsets.ModelViewSet):
-    queryset = TbPackageConfig.objects.all()
-    permission_classes = [permissions.AllowAny]
+
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class   = PackageConfigSerializer
+
+    def get_queryset(self):
+        queryset = TbPackageConfig.objects.all()
+
+        organization = self.request.query_params.get('org')
+        namePackage  = self.request.query_params.get('name')
+
+        if organization is not None:
+            queryset = queryset.filter(organization = organization)
+        elif namePackage is not None:
+            queryset = queryset.filter(namePackage = namePackage)
+
+        return queryset

@@ -5,5 +5,5 @@ from .serializers    import PermissionSerializer
 
 class PermissionViewSet(viewsets.ModelViewSet):
     queryset = TbPermission.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class   = PermissionSerializer

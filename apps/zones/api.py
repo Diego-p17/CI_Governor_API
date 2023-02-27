@@ -4,7 +4,7 @@ from .serializers    import ZoneSerializer
 
 
 class ZonenViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class   = ZoneSerializer
     
     def get_queryset(self):

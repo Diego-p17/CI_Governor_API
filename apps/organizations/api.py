@@ -5,7 +5,7 @@ from .serializers    import OrganizationSerializer
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = TbOrganization.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class   = OrganizationSerializer
     
     
