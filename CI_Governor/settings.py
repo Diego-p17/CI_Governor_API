@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.tokens',
     'apps.zones',
     'apps.login',
+    'apps.peopleModules',
     'django_filters',
     'corsheaders'
 ]

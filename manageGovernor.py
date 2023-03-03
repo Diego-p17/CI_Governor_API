@@ -215,16 +215,120 @@ class ManageGovernor():
             response = {"status": 500, 'data': e }
             return response
 
+    def getApp(self,userName, app ):
+
+
+        try:
+
+            #* GET TOKEN AUTHENTICATION
+            getToken = requests.post(
+                url  = f'http://127.0.0.1:8000/api-token-auth/',
+                json = {'username': 'root', 'password': 'root'}
+            )
+
+            if not getToken.status_code == 200:
+                logging.info("No se ha podido encontrar el token:")
+                response = {"status": getToken.status_code, 'data': {}}
+                return response
+
+            getToken = getToken.json()
+            token    = getToken.get('token')
+            headers  = {'Authorization': 'token {}'.format(token)}
+
+            #* Get ID APLICATION
+            aplication  = requests.get(
+                url     = f'http://127.0.0.1:8000/api/Aplications/?app={app}',
+                headers = headers
+            )
+
+            if not aplication.status_code == 200:
+                logging.info("Respuesta de la aplicacion:")
+                response = {"status": aplication.status_code, 'data': {} }
+                return response
+
+            aplication   = aplication.json()
+
+            if not aplication:
+                logging.info("Respuesta de la aplicacion:")
+                response = {"status": aplication.status_code, 'data': {} }
+                return response
+
+            for item in aplication:
+                idAplication = item.get('Id_Aplication')
+
+            #* Get ID USER
+            user  = requests.get(
+                url     = f'http://127.0.0.1:8000/api/Peoples/?username={userName}',
+                headers = headers
+            )
+
+            if not user.status_code == 200:
+                logging.info("Respuesta del usuario:")
+                response = {"status": user.status_code, 'data': {} }
+                return response
+
+            user = user.json()
+
+            if not user:
+                logging.info("Respuesta de la usuario:")
+                response = {"status": user.status_code, 'data': {} }
+                return response
+
+            for item in user:
+                idPeople = item.get('Id_People')
+
+            #*Get MODULES FOR USER AND APP
+            appModules  = requests.get(
+                url     = f'http://127.0.0.1:8000/api/PeopleModules/?app={idAplication}&user={idPeople}',
+                headers = headers
+            )
+
+            if not appModules.status_code == 200:
+                logging.info("Respuesta del usuario:")
+                response = {"status": appModules.status_code, 'data': {} }
+                return response
+
+            status     = appModules.status_code
+            appModules = appModules.json()
+
+            if not appModules:
+                logging.info("Respuesta de los Modulos:")
+                response = {"status": status, 'data': {} }
+                return response
+
+
+            if len(appModules)> 1:
+                listModules = []
+                for item in appModules:
+                    listModules.append(item.get('valueModule'))
+
+                response = {"status": status, 'data': listModules }
+                return response
+
+            for item in appModules:
+                module = item.get('valueModule')
+
+            response = {"status": status, 'data': module }
+            return response
+
+
+        except Exception as e:
+            logging.error('Ha ocurrido un error al consultar los Modulos:', e)
+            response = {"status": 500, 'data': e }
+            return response
 if __name__ == '__main__':
     logging.basicConfig( level = logging.INFO, format = "%(asctime)s [%(levelname)s]	%(module)s:%(lineno)d	%(funcName)s	| %(message)s" ,datefmt = '%Y-%m-%d %H:%M:%S')
 
     #* TEST CLASS
     manageGovernor    = ManageGovernor()
-    package, settings = manageGovernor.start(1)
+    # package, settings = manageGovernor.start(1)
+    modules = manageGovernor.getApp('Pcamargo','Messaging')
 
     logging.info("PACKAGES --------------------")
-    logging.info(package)
+    # logging.info(package)
     logging.info("SETTINGS --------------------")
-    logging.info(settings)
+    # logging.info(settings)
+    logging.info("MODULES --------------------")
+    logging.info(modules)
 
 

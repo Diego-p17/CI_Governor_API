@@ -33,4 +33,5 @@ urlpatterns = [
     path('', include('apps.tokens.urls')),
     path('', include('apps.zones.urls')),
     path('', include('apps.login.urls')),
+    path('', include('apps.peopleModules.urls')),
 ]
